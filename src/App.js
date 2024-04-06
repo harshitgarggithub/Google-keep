@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import "./index.css";
+import Header from "./Header";
+import CreateArea from "./CreateArea";
+import Note from "./Note";
 
-function App() {
+const App = () => {
+  let [addItem, setAddItem] = useState([]);
+  const addNote = (note) => {
+    // alert('button is clicked');
+
+    setAddItem = ((prevData) => {
+      return [...prevData, note];
+    });
+    console.log(addItem);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+
+      <Header />
+      <CreateArea passNote={addNote} />
+      <div>
+       {addItem.map((val, index) => {
+        return (
+          <Note
+            title={val.title}
+            content={val.content}
+            key={index}
+            id={index}
+          />
+        );
+      })}    
+      </div>
+     
+      {/* <Note/> */}
+    </>
   );
 }
 
