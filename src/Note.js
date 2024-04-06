@@ -1,17 +1,17 @@
 import React from 'react';
-
-const Note = ({title , content}) => {
-    // const deleteItems = ()=>{
-
-    // }
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+const Note = (props) => {
+  
   return (
     <>
     <div className="note">
-     {/* <i className="far fa-times-circle" onClick={()=>{props.onSelect(props.id)}}/> */}
+     {/* <i className="far fa-times-circle" onClick={(id)=>{props.onSelect(props.id)}}/> */}
     
-       <h1>{title}</h1>
-       <p>{content}</p>
-       {/* <button onClick={deleteItems}>-</button> */}
+       <h1>{props.title}</h1>
+       <p>{props.content}</p>
+      <button className='btn' onClick={(id)=>{props.onSelect(props.id)}}>
+      <DeleteOutlineIcon className="deleteIcon"/>
+      </button>
         {/* <h1>hello</h1>
        <p>this is para</p>  */}
     </div>   

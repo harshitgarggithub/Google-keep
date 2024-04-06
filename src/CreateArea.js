@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
 function CreateArea(props) {
+  const [expand, setExpand] = useState(false);
   const [note, setNote] = useState({
     title: "",
     content: "",
@@ -14,7 +16,7 @@ function CreateArea(props) {
         [name]: value,
       };
     });
-   // console.log(note);
+    // console.log(note);
   }
 
   const addEvent = (event) => {
@@ -25,14 +27,25 @@ function CreateArea(props) {
     });
     event.preventDefault();
   }
+  const expandIt = () => {
+    setExpand(true);
+  }
+  const bctoNormal = () => {
+    setExpand(false);
+  }
   return (
-    <div>
+    <div className='main_note' onDoubleClick={bctoNormal}>
       <form>
-        <input type="text" placeholder="title" name="title" value={note.title} onChange={handleChange} autoComplete='off' />
-        <p>
-          <textarea name="content" placeholder="Take a Note..." value={note.content} onChange={handleChange}></textarea>
-        </p>
-        <button onClick={addEvent}>+</button>
+        {expand ?
+          <input type="text" placeholder="title" name="title" value={note.title} onChange={handleChange} autoComplete='off' />
+          : null}
+        <textarea name="content" placeholder="Take a Note..." value={note.content} onChange={handleChange} onClick={expandIt}>
+        </textarea>
+        {expand ? (
+          <Button onClick={addEvent}>
+            <AddIcon className='plus_sign' />
+          </Button>
+        ) : null}
       </form>
     </div>
   );
